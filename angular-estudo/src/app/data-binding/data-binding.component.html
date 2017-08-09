@@ -1,0 +1,22 @@
+<section>
+  <article>
+    <header>
+      <h1>Interpolação</h1>
+    </header>
+    <p>{{ url }}</p>
+    <p>Fuck conta {{ 5 + getValor() }}</p>
+  </article>
+  <article>
+    <select #classe (change)="0">
+      <option value="1">Sucesso</option>
+      <option value="2">Info</option>
+      <option value="3">Alerta</option>
+      <option value="4">Erro</option>
+    </select>
+    <div class="alert" role="alert" [class.alert-success]="classe.value == '1'">Sucesso</div>
+    <div class="alert" role="alert" [class.alert-info]="classe.value == '2'">Info</div>
+    <div class="alert" role="alert" [class.alert-warning]="classe.value == '3'">Alerta</div>
+    <div class="alert" role="alert" [class.alert-danger]="classe.value == '4'">Erro</div>
+    <h1 [style.fontSize]="'16px'">Olá</h1>
+  </article>
+</section>
