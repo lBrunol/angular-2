@@ -9,6 +9,9 @@ export class DataBindingComponent implements OnInit {
 
   url: string = 'http://google.com.br';
   urlImage: string = 'http://lorempixel.com/400/200';
+  valorAtual: string = '';
+  valorSalvo: string = '';
+  isMouseOver: boolean = false;
 
   constructor() { }
 
@@ -17,6 +20,22 @@ export class DataBindingComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  alertBotao() {
+    alert('Olá mano da putaria');
+  }
+
+  aoDigitar(e: KeyboardEvent){
+    this.valorAtual = (<HTMLInputElement>e.target).value;
+  }
+
+  salvarValor(valor){
+    this.valorSalvo = valor;
+  }
+
+  onMouseOverOut(){
+    this.isMouseOver = !this.isMouseOver;
   }
 
 }

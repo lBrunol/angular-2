@@ -19,4 +19,27 @@
     <div class="alert" role="alert" [class.alert-danger]="classe.value == '4'">Erro</div>
     <h1 [style.fontSize]="'16px'">Olá</h1>
   </article>
+  <article>
+    <header>
+      <h1>Event Binding</h1>
+    </header>
+    <div>
+      <button (click)="alertBotao()" class="btn btn-primary">Click!</button>
+      <br><br>
+      <input 
+        type="text" 
+        (keyup)="aoDigitar($event)"
+        (keyup.enter)="salvarValor(campoInput.value)"
+        (blur)="salvarValor(campoInput.value)"
+        #campoInput />
+      <p>{{ valorAtual }}</p>
+      <p>{{ valorSalvo }}</p>
+      <br>
+      <p
+        (mouseover)="onMouseOverOut()"
+        (mouseout)="onMouseOverOut()"
+        [class.highlight]="isMouseOver == true"
+      >Passe o mouse</p>
+    </div>
+  </article>
 </section>
