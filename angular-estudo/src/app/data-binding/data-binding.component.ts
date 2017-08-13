@@ -12,6 +12,15 @@ export class DataBindingComponent implements OnInit {
   valorAtual: string = '';
   valorSalvo: string = '';
   isMouseOver: boolean = false;
+  nome: string = 'ABC';
+  valorInicial: number = 15;
+
+  nomeCurso: string = 'Angular';
+
+  pessoa: any = {
+    nome: 'Bruno',
+    idade: 21
+  }
 
   constructor() { }
 
@@ -36,6 +45,10 @@ export class DataBindingComponent implements OnInit {
 
   onMouseOverOut(){
     this.isMouseOver = !this.isMouseOver;
+  }
+
+  onMudouValor(e){
+    console.log(e);
   }
 
 }
