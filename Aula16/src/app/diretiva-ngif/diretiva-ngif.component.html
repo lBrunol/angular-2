@@ -1,3 +1,20 @@
-<p>
-  diretiva-ngif works!
-</p>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="jumbotron">
+			<h1>Cadastro de cursos</h1>
+		</div>
+		<div class="input-group">
+			<input type="text" class="form-control ang-txt-curso" placeholder="Adicionar curso" />
+			<div class="input-group-btn">
+				<button (click)="adicionarCurso()" type="button" class="btn btn-success">Adicionar</button>
+			</div>
+		</div>
+		<div *ngIf="cursos.length > 0" class="list-group">
+			<a *ngFor="let curso of cursos; let i = index" (click)="removerCurso($event, arguments)" [attr.data-index]="i" href="#" class="list-group-item">{{ curso }}</a>
+		</div>
+		<br>
+		<div *ngIf="cursos.length == 0" class="alert alert-danger">
+			Não existem cursos cadastrados
+		</div>
+	</div>
+</div>
