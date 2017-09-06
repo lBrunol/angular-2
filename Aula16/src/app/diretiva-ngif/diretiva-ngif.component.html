@@ -1,7 +1,7 @@
 <div class="row">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-8 col-md-offset-2" (keypress)="keyPressAdicionarCurso($event)">
 		<div class="jumbotron">
-			<h1>Cadastro de cursos</h1>
+			<ng-content select=".title"></ng-content>
 		</div>
 		<div class="input-group">
 			<input type="text" class="form-control ang-txt-curso" placeholder="Adicionar curso" />
@@ -9,11 +9,25 @@
 				<button (click)="adicionarCurso()" type="button" class="btn btn-success">Adicionar</button>
 			</div>
 		</div>
-		<div *ngIf="cursos.length > 0" class="list-group">
-			<a *ngFor="let curso of cursos; let i = index" (click)="removerCurso($event, arguments)" [attr.data-index]="i" href="#" class="list-group-item">{{ curso }}</a>
-		</div>
+		<div *ngIf="listCursos.length > 0" class="list-group">
+			<div class="row" *ngFor="let curso of listCursos; let i = index">
+				<div class="item-curso">
+					<div class="col-sm-11 col-xs-10">
+						<a (click)="removerCurso($event)" [attr.data-index]="i" href="#" class="list-group-item">{{ curso.nome }}</a>			
+					</div>
+					<div class="col-sm-1 col-xs-2 text-right">
+						<a href="#" (click)="toggleFavorito($event)" class="icon-star" [attr.data-index]="i">
+							<i class="glyphicon" [ngClass]="{
+								'glyphicon-star-empty': !curso.favorito,
+								'glyphicon-star': curso.favorito
+							}"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>		
 		<br>
-		<div *ngIf="cursos.length == 0" class="alert alert-danger">
+		<div *ngElse="listCursos.length > 0" class="alert alert-danger">
 			Não existem cursos cadastrados
 		</div>
 	</div>
