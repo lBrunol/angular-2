@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Adicionar Curso</h1>
+    <div class="col-md-9">
+      <input type="text" class="form-control" #elCurso>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary" (click)="addCurso(elCurso.value)">Adicionar Curso</button>
+    </div>
+  </div>
+</div>
+<h1>Courses</h1>
+<ul>
+  <li *ngFor="let curso of cursos">{{ curso }}</li>
+</ul>  
