@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Add course</h1>
+    <div class="col-md-9">
+      <input type="text" class="form-control" #elCurso>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary" (click)="addCurso(elCurso.value)"><span class="glyphicon glyphicon-plus-sign icon-plus"></span> Add</button>
+    </div>
+  </div>
+</div>
+<h1>Courses</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Number of lessons</th>
+    <th>Publication date</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let curso of cursos">
+    <td>{{ curso.nome | camelCase }}</td>
+    <td>{{ curso.aulas }}</td>
+    <td>{{ curso.dataPublicacao | date: 'dd/MM/y' }}</td>
+    <td>{{ curso.preco | currency: 'BRL': true }}</td>
+  </tr>
+</table>

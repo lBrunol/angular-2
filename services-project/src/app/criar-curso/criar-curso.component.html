@@ -11,7 +11,7 @@
 </div>
 <h1>Courses</h1>
 <ul>
-  <li *ngFor="let curso of cursos">{{ curso }}</li>
+  <li *ngFor="let curso of cursos">{{ curso | uppercase }}</li>
 </ul>
 
 <app-receber-curso></app-receber-curso>
