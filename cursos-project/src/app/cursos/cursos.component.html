@@ -1,0 +1,14 @@
+<table class="bordered">
+  <tr>
+    <th>Nome</th>
+    <th>Duração</th>
+    <th>Preço</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let curso of cursos$ | async">
+    <td>{{ curso.nome }}</td>
+    <td>{{ curso.duracao }}</td>
+    <td>{{ curso.preco | currency: 'BRL': true }}</td>
+    <td><a [routerLink]="['/cursos/detalhe', curso.id]" class="btn">Editar</a></td>
+  </tr>
+</table>
