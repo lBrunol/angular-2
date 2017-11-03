@@ -30,4 +30,12 @@ export class CursosDetalheComponent implements OnInit {
     this.router.navigate(['/cursos']);
   }
 
+  updatePreco(value: string){
+    try{
+      return Number(value.replace(/[^0-9\,-]+/g,"").replace(",","."));
+    }catch(e) {
+      return 0;
+    }
+  }
+
 }

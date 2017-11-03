@@ -11,13 +11,16 @@ import { CursosDetalheComponent } from './cursos/cursos-detalhe/cursos-detalhe.c
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './contact.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaginaNaoEncontradaComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,9 @@ import { LoginComponent } from './login/login.component';
     MaterializeModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ContactService
+  ],
   bootstrap: [
     AppComponent
   ]
