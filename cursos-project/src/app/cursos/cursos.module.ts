@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { CursosComponent } from "./cursos.component";
 import { CursosDetalheComponent } from "./cursos-detalhe/cursos-detalhe.component";
 import { CursosService } from "./cursos.service";
+import { CursoDetalheResolver } from "./guards/curso-detalhe.resolver";
 
 @NgModule({    
     imports: [
@@ -18,7 +19,8 @@ import { CursosService } from "./cursos.service";
         CursosDetalheComponent
     ],
     providers: [
-        CursosService
+        CursosService,
+        CursoDetalheResolver
     ]
 })
 export class CursosModule{

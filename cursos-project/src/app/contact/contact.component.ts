@@ -1,20 +1,20 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { ContactService } from '../contact.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.styl']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy { 
 
   modalEvent = new EventEmitter<string|MaterializeAction>();
+  subscription: Subscription;
   
   openContactModal(){
-    console.log('ola');
     this.modalEvent.emit({action:"modal", params:['open']});
   }
 
@@ -24,11 +24,15 @@ export class ContactComponent implements OnInit {
   }
   
   constructor(private router: Router, private contactService: ContactService) { 
-    this.contactService.openedModal$.subscribe(open => this.openContactModal());
+    this.subscription = this.contactService.openedModal$.subscribe(open => this.openContactModal());
   }
   
   ngOnInit() {
-    console.log('iniciei');
+
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   
   enviar(){

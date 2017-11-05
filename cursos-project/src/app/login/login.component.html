@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="row">
+  <div class="input-field col s12">
+    <input [(ngModel)]="email" type="email" class="validate">
+    <label for="email" data-error="wrong" data-success="right">E-mail</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <input type="password" [(ngModel)]="senha" class="validate">
+    <label for="password">Senha</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <button class="btn" (click)="entrar()">Entrar</button>
+  </div>
+</div>
+<div *ngIf="erro !== ''">
+  {{ erro }}
+</div>
