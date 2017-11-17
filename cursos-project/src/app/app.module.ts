@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { CursosComponent } from './cursos/cursos.component';
@@ -17,6 +20,8 @@ import { ContactService } from './contact.service';
 import { LoginService } from './login/login.service';
 import { LoginGuard } from './guards/login.guard';
 import { CursosGuard } from './guards/cursos.guard';
+import { MessageService } from './message.service';
+
 
 @NgModule({
   declarations: [
@@ -32,11 +37,16 @@ import { CursosGuard } from './guards/cursos.guard';
     BrowserAnimationsModule,
     FormsModule,   
     MaterializeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [
     ContactService,
     LoginService,
+    MessageService,
     LoginGuard,
     CursosGuard
   ],

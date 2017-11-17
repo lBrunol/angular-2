@@ -1,25 +1,37 @@
 <br><br>
-<div class="row" *ngIf="curso$ | async as curso">
+<div class="row">
   <div class="col s12">
     <div class="row">
       <div class="input-field col s12">
-        <input [(ngModel)]="curso.nome" type="text" id="nome" class="validate">
-        <label [class.active]="curso.nome != null" for="nome">Nome</label>
+        <input [(ngModel)]="curso.nome" type="text" id="nome">
+        <label [ngClass]="{'active': curso.nome != null}" for="nome">Nome</label>
       </div>      
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input [(ngModel)]="curso.duracao" id="duracao" type="text" class="validate">
-        <label [class.active]="curso.nome != null" for="duracao">Duração</label>
+        <input [(ngModel)]="curso.duracao" id="duracao" placeholder="" type="text">
+        <label [class.active]="curso.duracao != null" for="duracao">Duração</label>
       </div>
       <div class="input-field col s6">
-        <input [(ngModel)]="curso.preco" id="preco" type="text" class="validate">
-        <label [class.active]="curso.nome != null" for="preco">Preço</label>
+        <input [(ngModel)]="curso.preco" id="preco" type="text">
+        <label [class.active]="curso.preco != null" for="preco">Preço</label>
       </div>
     </div>
     <div class="row">
       <div class="col s12">
-        <a (click)="gotoCursos()" class="btn">Voltar</a>
+        <a (click)="gotoCursos()" class="btn waves-effect waves-light">Voltar</a>
+        <a (click)="updateCurso()" class="btn waves-effect waves-light light-blue darken-1">Salvar</a>
+        <a (click)="openModal()" class="btn waves-effect waves-light red right">Apagar</a>
       </div>
     </div>
+</div>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEvent">
+  <div class="modal-content">
+    <p>Deseja apagar o curso {{ curso.nome }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="deleteCurso()" class="btn waves-effect waves-light red">Apagar</button>
+    <button type="button" (click)="closeModal()" class="btn waves-effect waves-light">Cancelar</button>
+  </div>
 </div>

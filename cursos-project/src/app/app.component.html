@@ -1,4 +1,4 @@
-<nav *ngIf="mostrarMenu">
+<nav *ngIf="mostrarMenu" class="light-blue darken-1">
   <div class="container">
     <div class="nav-wrapper">
       <a routerLink="" class="brand-logo">Angular 2</a>
@@ -12,4 +12,9 @@
 <div class="container">
   <router-outlet></router-outlet>
   <router-outlet name="contato"></router-outlet>
+</div>
+<div *ngIf="messages != null">
+  <div class="message" *ngFor="let message of messages">
+    {{ message }}
+  </div>
 </div>

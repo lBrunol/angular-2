@@ -1,29 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Curso } from '../classes/Curso';
+import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import { MessageService } from '../message.service';
 
-export class Curso{
-  constructor(public id: number, public nome: string, public duracao: string, public preco: number) { }  
-}
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class CursosService {
 
-  cursos = [
-    new Curso(1, 'Java básico', '4 meses', 600),
-    new Curso(2, 'Java intermediário', '3 meses', 800),
-    new Curso(3, 'Herói do front-end', '6 meses', 1200),
-    new Curso(4, 'Herói do javascript', '3 meses', 400)
-  ];
+  private cursosUrl = 'api/cursos';
 
-  constructor() { }
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  getCursos(){
-    return Observable.of(this.cursos);
+  getCursos() : Observable<Curso[]>{
+    return this.http.get<Curso[]>(this.cursosUrl)
+      .pipe(
+        tap(cursos => this.log('Cursos recuperados')),
+        catchError(this.handleError('getCursos', []))
+      );
   }
 
-  getCurso(id: string){
-    return this.getCursos().map(cursos => cursos.find(curso => curso.id === parseInt(id)));
+  getCurso(id: string) : Observable<Curso>{
+    return this.http.get<Curso>(this.cursosUrl + `/${id}`)
+      .pipe(
+        tap(curso => this.log(`Curso recuperado: ID: ${id}`)),
+        catchError(this.handleError<Curso>(`getCurso id=${id}`))
+      );
+  }
+
+  updateCurso(curso: Curso): Observable<any>{
+    return this.http.put(this.cursosUrl, curso, httpOptions)
+      .pipe(
+        tap(f => this.log(`Curso atualizado: ID: ${curso.id}`)),
+        catchError(this.handleError<any>('updateCurso'))
+      );
+  }
+
+  deleteCurso(id: string|number) : Observable<Curso>{
+    return this.http.delete<Curso>(this.cursosUrl + `/${id}`, httpOptions)
+      .pipe(
+        tap(f => this.log(`Curso apagado: ID: ${id}`)),
+        catchError(this.handleError<Curso>('deleteCurso'))
+      );
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+   
+      this.log(`${operation} failed: ${error.message}`);
+
+      return Observable.of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    this.messageService.add('CursosService: ' + message);
   }
 }

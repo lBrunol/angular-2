@@ -7,12 +7,14 @@ import { CursosComponent } from "./cursos.component";
 import { CursosDetalheComponent } from "./cursos-detalhe/cursos-detalhe.component";
 import { CursosService } from "./cursos.service";
 import { CursoDetalheResolver } from "./guards/curso-detalhe.resolver";
+import { MaterializeModule } from "angular2-materialize";
 
 @NgModule({    
     imports: [
         CommonModule,
         CursosRoutingModule,
-        FormsModule
+        FormsModule,
+        MaterializeModule
     ],
     declarations: [
         CursosComponent,

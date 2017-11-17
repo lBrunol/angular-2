@@ -1,3 +1,4 @@
+<input type="text" class="input" />
 <table class="bordered">
   <tr>
     <th>Nome</th>
@@ -12,3 +13,6 @@
     <td><a [routerLink]="['/cursos/detalhe', curso.id]" class="btn">Editar</a></td>
   </tr>
 </table>
+<div class="fixed-action-btn">
+  <button type="button" (click)="cadastrarCurso()" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></button>
+</div>

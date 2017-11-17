@@ -4,6 +4,7 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { EventEmitter } from '@angular/core';
 import { ContactService } from './contact.service';
 import { LoginService } from './login/login.service';
+import { MessageService } from './message.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,14 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  mostrarMenu: boolean = false;
+  mostrarMenu: boolean = true;
+  messages: Array<string>;
 
-  constructor(private contactService: ContactService, private loginService: LoginService) { 
+  constructor(private contactService: ContactService, private loginService: LoginService, private messageService: MessageService) { 
   }
 
   ngOnInit(){
+    this.messages = this.messageService.messages;
     this.loginService.mostrarMenuEmitter.subscribe(mostrar => this.mostrarMenu = mostrar);
   }
 

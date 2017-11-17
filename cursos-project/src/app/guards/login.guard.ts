@@ -10,11 +10,12 @@ export class LoginGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) { }
 
   canActivate(state: ActivatedRouteSnapshot, route: RouterStateSnapshot) : Observable<boolean> | boolean {
-    if(this.loginService.estaLogado()){
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return true;
-    }
+    // if(this.loginService.estaLogado()){
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/login']);
+    //   return true;
+    // }
+    return true;
   }
 }
