@@ -1,20 +1,21 @@
-<br><br>
+<h1 *ngIf="curso != null">Edição {{ curso.nome }}</h1>
+<h1 *ngIf="curso == null">Novo curso</h1>
 <div class="row">
   <div class="col s12">
     <div class="row">
       <div class="input-field col s12">
-        <input [(ngModel)]="curso.nome" type="text" id="nome">
+        <input [(ngModel)]="curso.nome" type="text" autofocus id="nome">
         <label [ngClass]="{'active': curso.nome != null}" for="nome">Nome</label>
       </div>      
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input [(ngModel)]="curso.duracao" id="duracao" placeholder="" type="text">
-        <label [class.active]="curso.duracao != null" for="duracao">Duração</label>
+        <input [(ngModel)]="curso.duracao" id="duracao" autofocus type="text">
+        <label [ngClass]="{'active': curso.duracao != null}" for="duracao">Duração</label>
       </div>
       <div class="input-field col s6">
-        <input [(ngModel)]="curso.preco" id="preco" type="text">
-        <label [class.active]="curso.preco != null" for="preco">Preço</label>
+        <input [(ngModel)]="curso.preco" id="preco" autofocus type="text">
+        <label [ngClass]="{'active': curso.preco != null}" for="preco">Preço</label>
       </div>
     </div>
     <div class="row">

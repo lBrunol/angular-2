@@ -1,12 +1,18 @@
-<input type="text" class="input" />
-<table class="bordered">
+<h1>Cursos</h1>
+<div class="row">
+  <div class="col s6">
+    <input type="text" placeholder="Pesquise um curso..." class="input" #curso (keyup)="pesquisarCurso(curso.value)" />
+  </div>
+</div>
+<p *ngIf="cursos.length == 0 && consultou" class="flow-text">Nenhum curso encontrado</p>
+<table class="bordered" *ngIf="cursos.length > 0">
   <tr>
     <th>Nome</th>
     <th>Duração</th>
     <th>Preço</th>
     <th></th>
   </tr>
-  <tr *ngFor="let curso of cursos$ | async">
+  <tr *ngFor="let curso of cursos">
     <td>{{ curso.nome }}</td>
     <td>{{ curso.duracao }}</td>
     <td>{{ curso.preco | currency: 'BRL': true }}</td>

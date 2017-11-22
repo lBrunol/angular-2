@@ -4,6 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { slideInDownAnimation } from '../animations';
 import { Router } from '@angular/router';
 import { Curso } from '../classes/Curso';
+import { Subject } from 'rxjs/Subject';
+import { debounceTime } from 'rxjs/operators/debounceTime';
+import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { switchMap } from 'rxjs/operators/switchMap';
 
 @Component({
   selector: 'app-cursos',
@@ -15,16 +19,32 @@ export class CursosComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
-  cursos$: Observable<Curso[]>;
+  cursos = new Array<Curso>();
+  searchCursos = new Subject<string>();
+  consultou: boolean = false;
 
   constructor(private cursosService: CursosService, private router: Router) { }
 
   ngOnInit() {
-    this.cursos$ = this.cursosService.getCursos();
+    this.cursosService.getCursos()
+      .subscribe(cursos => { 
+        this.cursos = cursos;
+        this.consultou = true;
+      });
+
+    this.searchCursos.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((curso: string) => this.cursosService.searchCurso(curso))
+    ).subscribe(cursos => this.cursos = cursos);
   }
 
   cadastrarCurso(){
     this.router.navigate(['/cursos/detalhe']);
+  }
+
+  pesquisarCurso(curso: string){
+    this.searchCursos.next(curso);
   }
 
 }

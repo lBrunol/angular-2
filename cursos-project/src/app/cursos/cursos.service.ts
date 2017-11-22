@@ -50,6 +50,16 @@ export class CursosService {
       );
   }
 
+  searchCurso(curso: string) : Observable<Curso[]>{
+    if(!curso.trim()) return this.getCursos();
+
+    return this.http.get<Curso[]>(this.cursosUrl + `/?nome=${curso}`)
+      .pipe(
+        tap(f=> this.log(`Curso encontrado com o termo "${curso}"`)),
+        catchError(this.handleError<Curso[]>('searchCurso'))
+      );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
