@@ -1,38 +1,45 @@
-<h1 *ngIf="curso != null">Edição {{ curso.nome }}</h1>
-<h1 *ngIf="curso == null">Novo curso</h1>
-<div class="row">
-  <div class="col s12">
-    <div class="row">
-      <div class="input-field col s12">
-        <input [(ngModel)]="curso.nome" type="text" autofocus id="nome">
-        <label [ngClass]="{'active': curso.nome != null}" for="nome">Nome</label>
-      </div>      
-    </div>
-    <div class="row">
-      <div class="input-field col s6">
-        <input [(ngModel)]="curso.duracao" id="duracao" autofocus type="text">
-        <label [ngClass]="{'active': curso.duracao != null}" for="duracao">Duração</label>
+<h1 *ngIf="isEdit">Edição {{ curso?.nome }}</h1>
+<h1 *ngIf="!isEdit">Novo curso</h1>
+<form [formGroup]="cursoForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input formControlName="nome" type="text" id="nome">
+          <label for="nome">Nome</label>
+        </div>      
       </div>
-      <div class="input-field col s6">
-        <input [(ngModel)]="curso.preco" id="preco" autofocus type="text">
-        <label [ngClass]="{'active': curso.preco != null}" for="preco">Preço</label>
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="duracao" id="duracao" class="validate" type="text">
+          <label [attr.data-error]="cursoForm.invalid ? 'Erro' : ''" for="duracao">Duração</label>
+        </div>
+        <div class="input-field col s6">
+          <input [textMask]="precoMask" [unmask]="precoUnmask" formControlName="preco" id="preco" type="text">
+          <label for="preco">Preço</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button type="button" (click)="gotoCursos()" class="btn waves-effect waves-light">Voltar</button>
+          <button type="submit" [disabled]="cursoForm.pristine" class="btn waves-effect waves-light light-blue darken-1">Salvar</button>
+          <a (click)="openModal()" *ngIf="isEdit" class="btn waves-effect waves-light red right">Apagar</a>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <a (click)="gotoCursos()" class="btn waves-effect waves-light">Voltar</a>
-        <a (click)="updateCurso()" class="btn waves-effect waves-light light-blue darken-1">Salvar</a>
-        <a (click)="openModal()" class="btn waves-effect waves-light red right">Apagar</a>
-      </div>
-    </div>
-</div>
-
-<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEvent">
-  <div class="modal-content">
-    <p>Deseja apagar o curso {{ curso.nome }}</p>
   </div>
-  <div class="modal-footer">
-    <button type="button" (click)="deleteCurso()" class="btn waves-effect waves-light red">Apagar</button>
-    <button type="button" (click)="closeModal()" class="btn waves-effect waves-light">Cancelar</button>
+  <p>Formulário: {{ cursoForm.value | json }}</p>
+  <p>Status: {{ cursoForm.status | json }}</p>
+  <p>Modificado: {{ cursoForm.dirty | json }}</p>
+  <p>Tocado: {{ cursoForm.touched | json }}</p>
+  <p>Curso: {{ curso | json }}</p>
+  <div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEvent" *ngIf="isEdit">
+    <div class="modal-content">
+      <p>Deseja apagar o curso {{ curso.nome }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="deleteCurso()" class="btn waves-effect waves-light red">Apagar</button>
+      <button type="button" (click)="closeModal()" class="btn waves-effect waves-light">Cancelar</button>
+    </div>
   </div>
-</div>
+</form>

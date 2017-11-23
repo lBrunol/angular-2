@@ -7,12 +7,14 @@
 <p *ngIf="cursos.length == 0 && consultou" class="flow-text">Nenhum curso encontrado</p>
 <table class="bordered" *ngIf="cursos.length > 0">
   <tr>
+    <th>Id</th>
     <th>Nome</th>
     <th>Duração</th>
     <th>Preço</th>
     <th></th>
   </tr>
   <tr *ngFor="let curso of cursos">
+    <td>{{ curso.id }}</td>
     <td>{{ curso.nome }}</td>
     <td>{{ curso.duracao }}</td>
     <td>{{ curso.preco | currency: 'BRL': true }}</td>

@@ -34,6 +34,14 @@ export class CursosService {
       );
   }
 
+  addCurso(curso: Curso) : Observable<any>{
+    return this.http.post<Curso>(this.cursosUrl, curso, httpOptions)
+      .pipe(
+        tap(f => this.log(`Curso inserido: ID: ${curso.id}`)),
+        catchError(this.handleError<Curso>('addCurso'))
+      );
+  }
+
   updateCurso(curso: Curso): Observable<any>{
     return this.http.put(this.cursosUrl, curso, httpOptions)
       .pipe(

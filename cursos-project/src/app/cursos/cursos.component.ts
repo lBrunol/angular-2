@@ -40,7 +40,7 @@ export class CursosComponent implements OnInit {
   }
 
   cadastrarCurso(){
-    this.router.navigate(['/cursos/detalhe']);
+    this.router.navigate(['/cursos/adicionar']);
   }
 
   pesquisarCurso(curso: string){

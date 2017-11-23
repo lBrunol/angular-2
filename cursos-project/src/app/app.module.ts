@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +35,8 @@ import { MessageService } from './message.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,   
+    FormsModule,
+    ReactiveFormsModule,
     MaterializeModule,
     AppRoutingModule,
     HttpClientModule,
