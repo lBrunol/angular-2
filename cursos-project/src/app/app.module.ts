@@ -15,12 +15,12 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
-import { AdminComponent } from './admin/admin.component';
 import { ContactService } from './contact.service';
 import { LoginService } from './login/login.service';
 import { LoginGuard } from './guards/login.guard';
 import { CursosGuard } from './guards/cursos.guard';
 import { MessageService } from './message.service';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
 
 @NgModule({
@@ -29,8 +29,7 @@ import { MessageService } from './message.service';
     PaginaNaoEncontradaComponent,
     HomeComponent,
     LoginComponent,
-    ContactComponent,
-    AdminComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +38,7 @@ import { MessageService } from './message.service';
     ReactiveFormsModule,
     MaterializeModule,
     AppRoutingModule,
+    AdminRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }

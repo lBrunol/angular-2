@@ -42,6 +42,10 @@ export class CursosDetalheComponent implements OnInit, OnDestroy {
   cursoAddSubscription: Subscription;
   cursoDeleteSubscription: Subscription;
 
+  get nome() { return this.cursoForm.get('nome'); }
+  get duracao() { return this.cursoForm.get('duracao'); }
+  get preco() { return this.cursoForm.get('preco'); }
+
   constructor(
     private router: Router, 
     private activatedRoute: ActivatedRoute, 
@@ -52,9 +56,9 @@ export class CursosDetalheComponent implements OnInit, OnDestroy {
 
   createForm(): any {
     this.cursoForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(4)]],
+      nome: ['', Validators.required],
       duracao: ['', Validators.required],
-      preco: ['', Validators.required]
+      preco: ['', [Validators.required, Validators.min(1)]]
     });
   }
 

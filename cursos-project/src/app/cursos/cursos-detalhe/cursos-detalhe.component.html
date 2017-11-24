@@ -5,24 +5,30 @@
     <div class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input formControlName="nome" type="text" id="nome">
-          <label for="nome">Nome</label>
+          <input formControlName="nome" [ngClass]="{'invalid' : nome.invalid && (nome.dirty || nome.touched), 'valid': nome.valid}" type="text" id="nome" />
+          <label for="nome" 
+            [attr.data-error]="nome.invalid && (nome.dirty || nome.touched) ? nome.errors.required ? 'O nome é obrigatório' : '' : ''">
+            Nome</label>
         </div>      
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input formControlName="duracao" id="duracao" class="validate" type="text">
-          <label [attr.data-error]="cursoForm.invalid ? 'Erro' : ''" for="duracao">Duração</label>
+          <input formControlName="duracao" [ngClass]="{'invalid' : duracao.invalid && (duracao.dirty || duracao.touched), 'valid': duracao.valid}" id="duracao" type="text" />
+          <label 
+            [attr.data-error]="duracao.invalid && (duracao.dirty || duracao.touched) ? duracao.errors.required ? 'A duração é obrigatória' : '' : ''" 
+            for="duracao">Duração</label>
         </div>
         <div class="input-field col s6">
-          <input [textMask]="precoMask" [unmask]="precoUnmask" formControlName="preco" id="preco" type="text">
-          <label for="preco">Preço</label>
+          <input [textMask]="precoMask" [ngClass]="{'invalid' : preco.invalid && (preco.dirty || preco.touched), 'valid': preco.valid}" [unmask]="precoUnmask" formControlName="preco" id="preco" type="text" />
+          <label 
+            [attr.data-error]="preco.invalid && (preco.dirty || preco.touched) ? preco.errors.required ? 'O preço é obrigatório' : preco.errors.min ? 'O preço deve ser maior que 0' : '' : ''" 
+            for="preco">Preço</label>
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <button type="button" (click)="gotoCursos()" class="btn waves-effect waves-light">Voltar</button>
-          <button type="submit" [disabled]="cursoForm.pristine" class="btn waves-effect waves-light light-blue darken-1">Salvar</button>
+          <button type="submit" [disabled]="cursoForm.pristine || cursoForm.invalid" class="btn waves-effect waves-light light-blue darken-1">Salvar</button>
           <a (click)="openModal()" *ngIf="isEdit" class="btn waves-effect waves-light red right">Apagar</a>
         </div>
       </div>
