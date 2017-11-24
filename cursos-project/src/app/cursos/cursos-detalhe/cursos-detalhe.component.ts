@@ -52,9 +52,9 @@ export class CursosDetalheComponent implements OnInit, OnDestroy {
 
   createForm(): any {
     this.cursoForm = this.fb.group({
-      nome: ['', Validators.required],
-      duracao: '',
-      preco: ''
+      nome: ['', [Validators.required, Validators.minLength(4)]],
+      duracao: ['', Validators.required],
+      preco: ['', Validators.required]
     });
   }
 
@@ -85,18 +85,20 @@ export class CursosDetalheComponent implements OnInit, OnDestroy {
     this.router.navigate(['/cursos']);
   }
 
-  onSubmit(){    
-    if(this.isEdit){
-      this.curso = this.prepareCurso();
-      this.cursoUpdateSubscription = this.cursosService.updateCurso(this.curso)
-        .subscribe(f => this.gotoCursos());
-    } else {
-      this.curso = this.prepareCurso();
-      this.cursoAddSubscription = this.cursosService.addCurso(this.curso)
-        .subscribe((curso: Curso) => {
-          this.curso = curso;
-          this.redirectAfterAdd();
-        });
+  onSubmit(){
+    if(this.cursoForm.valid){
+      if(this.isEdit){
+        this.curso = this.prepareCurso();
+        this.cursoUpdateSubscription = this.cursosService.updateCurso(this.curso)
+          .subscribe(f => this.gotoCursos());
+      } else {
+        this.curso = this.prepareCurso();
+        this.cursoAddSubscription = this.cursosService.addCurso(this.curso)
+          .subscribe((curso: Curso) => {
+            this.curso = curso;
+            this.redirectAfterAdd();
+          });
+      }
     }
   }
 
@@ -104,7 +106,7 @@ export class CursosDetalheComponent implements OnInit, OnDestroy {
     this.router.navigate(['/cursos/detalhe', this.curso.id]);
   }
 
-  prepareCurso() : Curso{
+  prepareCurso() : Curso {
     const formValues = this.cursoForm.value;
 
     const saveCurso: Curso = {
