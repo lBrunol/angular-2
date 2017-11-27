@@ -13,7 +13,7 @@
     <th>Preço</th>
     <th></th>
   </tr>
-  <tr *ngFor="let curso of cursos">
+  <tr *ngFor="let curso of cursos | paginate: { itemsPerPage: 5, currentPage: page}">
     <td>{{ curso.id }}</td>
     <td>{{ curso.nome }}</td>
     <td>{{ curso.duracao }}</td>
@@ -21,6 +21,7 @@
     <td><a [routerLink]="['/cursos/detalhe', curso.id]" class="btn">Editar</a></td>
   </tr>
 </table>
+<paginacao [autoHide]="true" (pageChange)="page = $event"></paginacao>
 <div class="fixed-action-btn">
   <button type="button" (click)="cadastrarCurso()" class="btn-floating btn-large waves-effect waves-light red lighten-2"><i class="material-icons">add</i></button>
 </div>

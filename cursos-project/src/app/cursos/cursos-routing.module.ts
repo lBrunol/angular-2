@@ -6,7 +6,6 @@ import { CursoDetalheResolver } from "./guards/curso-detalhe.resolver";
 
 const cursosRoutes: Routes = [
     { path: '', component: CursosComponent },
-    { path: 'detalhe', component: CursosDetalheComponent },
     { path: 'detalhe/:id', component: CursosDetalheComponent, resolve: { curso : CursoDetalheResolver } },
     { path: 'adicionar', component: CursosDetalheComponent }
 ];

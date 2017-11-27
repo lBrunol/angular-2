@@ -1,0 +1,22 @@
+<pagination-template #p="paginationApi" (pageChange)="pageChange.emit($event)">
+  <ul class="pagination" *ngIf="!(autoHide && p.pages.length <= 1)">
+    <li *ngIf="!p.isFirstPage()" class="waves-effect">
+      <a (click)="p.previous()"><i class="material-icons">chevron_left</i></a>
+    </li>
+    <li *ngIf="p.isFirstPage()" class="disabled waves-effect">
+      <a><i class="material-icons">chevron_left</i></a>
+    </li>
+    
+    <li *ngFor="let page of p.pages" [ngClass]="{'active': p.getCurrent() === page.value, 'waves-effect': true, 'light-blue darken-1': p.getCurrent() === page.value}">
+      <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</a>
+      <a *ngIf="p.getCurrent() === page.value">{{ page.label }}</a>
+    </li>
+
+    <li *ngIf="!p.isLastPage()" class="waves-effect">
+      <a (click)="p.next()"><i class="material-icons">chevron_right</i></a>
+    </li>
+    <li *ngIf="p.isLastPage()" class="disabled waves-effect">
+      <a><i class="material-icons">chevron_right</i></a>
+    </li>
+  </ul>
+</pagination-template>

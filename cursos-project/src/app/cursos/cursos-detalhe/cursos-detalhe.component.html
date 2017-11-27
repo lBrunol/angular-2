@@ -1,4 +1,4 @@
-<h1 *ngIf="isEdit">Edição {{ curso?.nome }}</h1>
+<h1 *ngIf="isEdit">Editar curso: {{ curso?.nome }}</h1>
 <h1 *ngIf="!isEdit">Novo curso</h1>
 <form [formGroup]="cursoForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="row">

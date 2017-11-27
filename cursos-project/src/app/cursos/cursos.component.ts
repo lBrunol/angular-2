@@ -22,6 +22,7 @@ export class CursosComponent implements OnInit {
   cursos = new Array<Curso>();
   searchCursos = new Subject<string>();
   consultou: boolean = false;
+  page: number = 1;
 
   constructor(private cursosService: CursosService, private router: Router) { }
 

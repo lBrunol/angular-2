@@ -1,0 +1,29 @@
+<h1>Alunos</h1>
+<div class="row">
+  <div class="col s6">
+    <input type="text" placeholder="Pesquise um aluno..." class="input" #aluno (keyup)="pesquisarAluno(aluno.value)" />
+  </div>
+</div>
+<p *ngIf="alunos.length == 0 && consultou" class="flow-text">Nenhum aluno encontrado</p>
+<table class="bordered" *ngIf="alunos.length > 0">
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Sobrenome</th>
+    <th>Sexo</th>
+    <th>Data de nascimento</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let aluno of alunos | paginate: { itemsPerPage: 5, currentPage: page}">
+    <td>{{ aluno.id }}</td>
+    <td>{{ aluno.nome }}</td>
+    <td>{{ aluno.sobrenome }}</td>
+    <td>{{ aluno.sexo }}</td>
+    <td>{{ aluno.dataNascimento }}</td>
+    <td><a [routerLink]="['/alunos/detalhe', aluno.id]" class="btn">Editar</a></td>
+  </tr>
+</table>
+<paginacao (pageChange)="page = $event"></paginacao>
+<div class="fixed-action-btn">
+  <button type="button" (click)="cadastrarAluno()" class="btn-floating btn-large waves-effect waves-light red lighten-2"><i class="material-icons">add</i></button>
+</div>

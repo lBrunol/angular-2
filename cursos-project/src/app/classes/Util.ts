@@ -1,4 +1,13 @@
-export class Util{
+import { Observable } from "rxjs/Observable";
+import { MessageService } from "../message.service";
+import { HttpHeaders } from '@angular/common/http';
+
+export const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+export class Util{    
+
     /**
      * Converte um número para o formato real
      * 
@@ -24,5 +33,17 @@ export class Util{
         }catch(e) {
           return 0;
         }
+    }
+
+    static handleError<T> (operation = 'operation', result?: T) {
+        const messageService = new MessageService();
+
+        return (error: any): Observable<T> => {
+          console.error(error);
+
+          messageService.add(`${operation} failed: ${error.message}`);
+    
+          return Observable.of(result as T);
+        };
     }
 }

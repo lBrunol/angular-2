@@ -1,0 +1,60 @@
+<h1 *ngIf="isEdit">Editar aluno: {{ aluno.nome }}</h1>
+<h1 *ngIf="!isEdit">Novo aluno</h1>
+<form [formGroup]="alunoForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="nome" [ngClass]="{'invalid' : nome.invalid && (nome.dirty || nome.touched), 'valid': nome.valid}" type="text" id="nome" />
+          <label for="nome" 
+            [attr.data-error]="nome.invalid && (nome.dirty || nome.touched) ? nome.errors.required ? 'O nome é obrigatório' : '' : ''">
+            Nome</label>
+        </div>
+        <div class="input-field col s6">
+          <input formControlName="sobrenome" [ngClass]="{'invalid' : sobrenome.invalid && (sobrenome.dirty || sobrenome.touched), 'valid': sobrenome.valid}" id="sobrenome" type="text" />
+          <label 
+            [attr.data-error]="sobrenome.invalid && (sobrenome.dirty || sobrenome.touched) ? sobrenome.errors.required ? 'A duração é obrigatória' : '' : ''" 
+            for="sobrenome">Sobrenome</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <select [ngClass]="{'invalid' : sexo.invalid && (sexo.dirty || sexo.touched), 'valid': sexo.valid}" name="sexo" formControlName="sexo" id="sexo" materialize="material_select" [materializeSelectOptions]="selectOptions">
+              <option value="" disabled selected>Selecione o sexo</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </select>
+          <label for="sexo">Sexo</label>
+        </div>
+        <div class="input-field col s6">
+          <input [ngClass]="{'invalid' : dataNascimento.invalid && (dataNascimento.dirty || dataNascimento.touched), 'valid': dataNascimento.valid}" formControlName="dataNascimento" id="dataNascimento" type="text" materialize="pickadate"
+          [materializeParams]="[{format: 'dd/mm/yyyy', selectYears: 150, today: 'Hoje', clear: 'Limpar'}]"/>
+          <label 
+            [attr.data-error]="dataNascimento.invalid && (dataNascimento.dirty || dataNascimento.touched) ? dataNascimento.errors.required ? 'A data de nascimento é obrigatória' : '' : ''" 
+            for="dataNascimento">Data de nascimento</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button type="button" (click)="gotoAlunos()" class="btn waves-effect waves-light">Voltar</button>
+          <button type="submit" [disabled]="alunoForm.pristine || alunoForm.invalid" class="btn waves-effect waves-light light-blue darken-1">Salvar</button>
+          <a (click)="openModal()" *ngIf="isEdit" class="btn waves-effect waves-light red right">Apagar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Formulário: {{ alunoForm.value | json }}</p>
+  <p>Status: {{ alunoForm.status | json }}</p>
+  <p>Modificado: {{ alunoForm.dirty | json }}</p>
+  <p>Tocado: {{ alunoForm.touched | json }}</p>
+  <p>Aluno: {{ aluno | json }}</p>
+  <div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEvent" *ngIf="isEdit">
+    <div class="modal-content">
+      <p>Deseja apagar o aluno {{ aluno.nome }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="deleteAluno()" class="btn waves-effect waves-light red">Apagar</button>
+      <button type="button" (click)="closeModal()" class="btn waves-effect waves-light">Cancelar</button>
+    </div>
+  </div>
+</form>
