@@ -5,7 +5,7 @@ export class Aluno {
         public sobrenome: string, 
         public sexo: string, 
         public dataNascimento: string,
-        public dataCadastro: string,
+        public dataCadastro?: string,
     ){
 
     }

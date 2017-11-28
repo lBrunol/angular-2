@@ -22,7 +22,7 @@ export class AlunosDetalheComponent implements OnInit , OnDestroy {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
   
-  aluno = new Aluno(null, null, null, null, null);
+  aluno = new Aluno(null, null, null, null, null, null);
   modalEvent = new EventEmitter<string|MaterializeAction>();
   alunoForm: FormGroup;
   isEdit: boolean = false;
@@ -59,7 +59,7 @@ export class AlunosDetalheComponent implements OnInit , OnDestroy {
       (data: { aluno: Aluno }) => {
         if(Object.keys(data).length > 0 && data.constructor === Object){
           this.isEdit = true;
-          this.aluno = data.aluno;
+          this.aluno = Object.assign({}, data.aluno);
           this.alunoForm.reset({
             nome: this.aluno.nome,
             sobrenome: this.aluno.sobrenome,
@@ -111,7 +111,8 @@ export class AlunosDetalheComponent implements OnInit , OnDestroy {
       nome: formValues.nome as string,
       sobrenome: formValues.sobrenome as string,
       sexo: formValues.sexo as string,
-      dataNascimento: formValues.dataNascimento as string
+      dataNascimento: formValues.dataNascimento as string,
+      dataCadastro: this.aluno.dataCadastro || '28/11/2017'
     };
 
     return saveAluno;
