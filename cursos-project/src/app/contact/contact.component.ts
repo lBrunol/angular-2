@@ -24,11 +24,10 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
   
   constructor(private router: Router, private contactService: ContactService) { 
-    this.subscription = this.contactService.openedModal$.subscribe(open => this.openContactModal());
   }
   
   ngOnInit() {
-
+    this.subscription = this.contactService.openedModal$.subscribe(open => this.openContactModal());
   }
 
   ngOnDestroy() {
@@ -38,12 +37,11 @@ export class ContactComponent implements OnInit, OnDestroy {
   enviar(){
     setTimeout(() => {
       alert('Enviado');
-      this.fechar();
+      this.closeContactModal();
     }, 500);
   }
 
   fechar() {
     this.router.navigate([{ outlets: { contato: null }}]);
   }
-
 }

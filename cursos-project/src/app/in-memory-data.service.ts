@@ -1,6 +1,7 @@
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { Curso } from "./classes/Curso";
 import { Aluno } from "./classes/Aluno";
+import { Contato } from "./classes/Contato";
 
 export class InMemoryDataService implements InMemoryDbService {
 
@@ -37,7 +38,13 @@ export class InMemoryDataService implements InMemoryDbService {
             new Aluno(11, 'Marcos', 'Santos', 'Masculino', '23/06/1992', '01/03/2017'),
             new Aluno(12, 'Samantha', 'Marcone', 'Feminino', '23/06/1992', '01/05/2017'),
         ]
-        return {cursos, alunos};
+
+        const contatos = [
+            new Contato(1, 'Carolina', 'O curso de Java básico é excelente.'),
+            new Contato(2, 'José Silva', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec fringilla ligula. Nunc ultrices augue ligula, sed ornare elit egestas hendrerit.'),
+            new Contato(3, 'Mariana Rangel', 'Duis bibendum placerat arcu condimentum maximus. Fusce lorem metus, malesuada malesuada consectetur et, dapibus non lectus.'),
+        ]
+        return {cursos, alunos, contatos};
     }
 
 }

@@ -22,6 +22,7 @@ import { LoginGuard } from './guards/login.guard';
 import { CursosGuard } from './guards/cursos.guard';
 import { MessageService } from './message.service';
 import { CadastroAlunosComponent } from './graficos/cadastro-alunos/cadastro-alunos.component';
+import { ContactHomeComponent } from './contact/contact-home/contact-home.component';
 
 @NgModule({  
   imports: [
@@ -46,6 +47,7 @@ import { CadastroAlunosComponent } from './graficos/cadastro-alunos/cadastro-alu
     ContactComponent,
     PaginaNaoEncontradaComponent,
     CadastroAlunosComponent,
+    ContactHomeComponent,
   ],
   providers: [
     ContactService,

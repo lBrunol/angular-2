@@ -1,0 +1,10 @@
+<table class="bordered" *ngIf="contatos.length > 0">
+  <tr>
+    <th>Nome</th>
+    <th>Mensagem</th>
+  </tr>
+  <tr *ngFor="let contato of contatos">
+    <td>{{ contato.nome }}</td>
+    <td>{{ contato.mensagem }}</td>
+  </tr>
+</table>
