@@ -9,8 +9,8 @@ import { LoginGuard } from "./guards/login.guard";
 import { CursosGuard } from "./guards/cursos.guard";
 
 const appRoutes: Routes = [
-    { path: 'cursos', loadChildren: 'app/cursos/cursos.module.ts#CursosModule', canActivate: [LoginGuard], canActivateChild: [CursosGuard] },
-    { path: 'alunos', loadChildren: 'app/alunos/alunos.module.ts#AlunosModule', canActivate: [LoginGuard], canActivateChild: [CursosGuard] },
+    { path: 'cursos', loadChildren: './cursos/cursos.module.ts#CursosModule', canActivate: [LoginGuard], canActivateChild: [CursosGuard] },
+    { path: 'alunos', loadChildren: './alunos/alunos.module.ts#AlunosModule', canActivate: [LoginGuard], canActivateChild: [CursosGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
     { path: 'contato', component: ContactComponent, outlet: 'contato', canActivate: [LoginGuard] },

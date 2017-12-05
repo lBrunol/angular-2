@@ -9,13 +9,36 @@ import { Aluno } from '../../classes/Aluno';
 })
 export class CadastroAlunosComponent implements OnInit {
 
-  dados = new Dados();
+  dados = new Array<Dados>();
   labels: string[] = [];
-  type: string = 'bar';
+  type: string = 'horizontalBar';
+  colors = [
+    {
+      backgroundColor: 'rgba(3, 155, 229, 0.75)'
+    }
+  ];
   options: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+            min: 0,
+            stepSize: 1
+          },
+          stacked: true
+      }],
+      xAxes: [{
+        ticks: {
+          min: 0,
+          stepSize: 1
+        },
+        stacked: false
+    }]
+    }
   };
+
+  graficoReady:boolean = false;
 
   dadosGrafico: DadosGrafico[] = [
     new DadosGrafico('Janeiro', 1, []),
@@ -34,31 +57,31 @@ export class CadastroAlunosComponent implements OnInit {
 
   constructor(private alunosService: AlunosService) {}
 
-  ngOnInit() {    
-    this.dados.label = 'Alunos';
-    this.dados.dados = [];
-    
+  ngOnInit() {
+    const dado = new Dados();
+    dado.label = 'Alunos';
+    dado.data = [];
+
     this.alunosService.getAlunos().subscribe((alunos: Aluno[]) => {
 
-      this.dadosGrafico.forEach((item, i) => {
-        alunos.forEach((alu, j) => {
+      this.dadosGrafico.forEach((item) => {
+        alunos.forEach((alu) => {
           const splDataCadastro: string[] = alu.dataCadastro.split('/');
           const mesAtual: number = new Date(parseInt(splDataCadastro[2]), parseInt(splDataCadastro[1]) -1, parseInt(splDataCadastro[0])).getMonth() + 1;
-          console.log(item);
-          console.log(alu);
           if(mesAtual === item.numMes){
             item.dados.push(alu);
           }
         });
       });
 
-      this.dadosGrafico.forEach((item, i) => {
+      this.dadosGrafico.forEach((item) => {
         if(item.dados.length > 0){
           this.labels.push(item.mes);
-          this.dados.dados.push(item.dados.length.toString());
+          dado.data.push(item.dados.length);
         }
       });
-      
+      this.dados.push(dado);
+      this.graficoReady = true;
     });
   }
 }
@@ -75,6 +98,7 @@ export class DadosGrafico {
 }
 
 export class Dados {
-  dados: Array<any>;
+  data: Array<any>;
   label: string;
+  backgroundColor?: Array<any>;
 }

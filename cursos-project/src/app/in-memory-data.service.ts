@@ -35,6 +35,7 @@ export class InMemoryDataService implements InMemoryDbService {
             new Aluno(9, 'Mariana', 'Vasconselos', 'Feminino', '15/01/1990', '01/02/2017'),
             new Aluno(10, 'Juliana', 'Albuquerque', 'Feminino', '15/06/1993', '06/02/2017'),
             new Aluno(11, 'Marcos', 'Santos', 'Masculino', '23/06/1992', '01/03/2017'),
+            new Aluno(12, 'Samantha', 'Marcone', 'Feminino', '23/06/1992', '01/05/2017'),
         ]
         return {cursos, alunos};
     }

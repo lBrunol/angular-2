@@ -5,7 +5,7 @@ import { AlunosDetalheComponent } from "./alunos-detalhe/alunos-detalhe.componen
 import { AlunoDetalheResolver } from "./guards/aluno-detalhe.resolver";
 
 const alunosRoutes: Routes = [
-    { path: '', component: AlunosComponent },
+    { path: '', component: AlunosComponent, pathMatch: 'full' },
     { path: 'detalhe/:id', component: AlunosDetalheComponent, resolve: { aluno: AlunoDetalheResolver } },
     { path: 'adicionar', component: AlunosDetalheComponent }
 ];

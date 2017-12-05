@@ -14,6 +14,6 @@ export class CursosGuard implements CanActivateChild{
     //   return true;
     // }
 
-    return true;
+    return Observable.of(true);
   }  
 }

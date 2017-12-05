@@ -5,7 +5,7 @@ import { CursosDetalheComponent } from "./cursos-detalhe/cursos-detalhe.componen
 import { CursoDetalheResolver } from "./guards/curso-detalhe.resolver";
 
 const cursosRoutes: Routes = [
-    { path: '', component: CursosComponent },
+    { path: '', component: CursosComponent, pathMatch: 'full' },
     { path: 'detalhe/:id', component: CursosDetalheComponent, resolve: { curso : CursoDetalheResolver } },
     { path: 'adicionar', component: CursosDetalheComponent }
 ];

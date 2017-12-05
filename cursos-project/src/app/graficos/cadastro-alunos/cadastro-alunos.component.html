@@ -1,1 +1,5 @@
-<canvas baseChart [datasets]="dados" [labels]="labels" [chartType]="type" [options]="options"></canvas>
+<div class="row" *ngIf="graficoReady">
+    <div class="col s12">
+        <canvas baseChart [datasets]="dados" [labels]="labels" [colors]="colors" [chartType]="type" [options]="options"></canvas>
+    </div>
+</div>
