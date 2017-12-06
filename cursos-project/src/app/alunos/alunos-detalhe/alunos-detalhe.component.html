@@ -19,7 +19,7 @@
       </div>
       <div class="row">
         <div class="input-field col s6">
-            <select [ngClass]="{'invalid' : sexo.invalid && (sexo.dirty || sexo.touched), 'valid': sexo.valid}" name="sexo" formControlName="sexo" id="sexo" materialize="material_select" [materializeSelectOptions]="selectOptions">
+            <select [ngClass]="{'invalid' : sexo.invalid && (sexo.dirty || sexo.touched), 'valid': sexo.valid}" name="sexo" formControlName="sexo" id="sexo" materialize="material_select">
               <option value="" disabled selected>Selecione o sexo</option>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
