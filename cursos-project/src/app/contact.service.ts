@@ -11,9 +11,11 @@ import { tap, catchError } from "rxjs/operators";
 export class ContactService {
 
   private openModalSource = new Subject<any>();
+  private updatedContatoSource = new Subject<Contato>();
   private contatosUrl = 'api/contatos';
 
   openedModal$ = this.openModalSource.asObservable();
+  updatedContato$ = this.updatedContatoSource.asObservable();
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -42,7 +44,10 @@ export class ContactService {
   addContato(contato: Contato) : Observable<any>{
     return this.http.post<Contato>(this.contatosUrl, contato, httpOptions)
       .pipe(
-        tap(f => this.log(`Contato inserido: ID: ${contato.id}`)),
+        tap((contatoAdicionado: Contato) => {
+          this.updatedContatoSource.next(contatoAdicionado);
+          this.log(`Contato inserido: ID: ${contato.id}`)
+        }),
         catchError(Util.handleError<Contato>('addContato'))
       );
   }

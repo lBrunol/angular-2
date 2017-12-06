@@ -1,21 +1,27 @@
 <div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEvent">
-  <div class="modal-content">
-    <h4>Contato</h4>
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" id="nome" class="validate">
-        <label for="nome">Nome</label>
-      </div>      
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea id="mensagem" class="materialize-textarea"></textarea>
-        <label for="mensagem">Mensagem</label>
+  <form [formGroup]="contatoForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="modal-content">
+      <h4>Contato</h4>
+      <div class="row">
+        <div class="input-field col s12">
+          <input formControlName="nome" [ngClass]="{'invalid' : nome.invalid && (nome.dirty || nome.touched), 'valid': nome.valid}" type="text" id="nome" class="validate">
+          <label for="nome"
+            [attr.data-error]="nome.invalid && (nome.dirty || nome.touched) ? nome.errors.required ? 'O nome é obrigatório' : '' : ''">
+            Nome</label>
+        </div>      
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea formControlName="mensagem" [ngClass]="{'invalid': mensagem.invalid && (mensagem.dirty || mensagem.touched), 'valid': mensagem.valid}" id="mensagem" class="materialize-textarea"></textarea>
+          <label 
+          [attr.data-error]="mensagem.invalid && (mensagem.dirty || mensagem.touched) ? mensagem.errors.required ? 'A mensagem é obrigatória' : '' : ''"
+            for="mensagem">Mensagem</label>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" (click)="enviar()" class="waves-effect waves-light btn">Enviar</button>
-    <button type="button" (click)="closeContactModal()" class="btn waves-effect waves-light red">Cancelar</button>
-  </div>
+    <div class="modal-footer">
+      <button type="submit" type="submit" [disabled]="contatoForm.pristine || contatoForm.invalid" class="waves-effect waves-light btn">Enviar</button>
+      <button type="button" (click)="closeContactModal()" class="btn waves-effect waves-light red">Cancelar</button>
+    </div>
+  </form>
 </div>
